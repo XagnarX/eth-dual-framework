@@ -1,0 +1,19 @@
+#!/bin/bash
+
+case "$1" in
+  "work")
+    gh auth logout
+    gh auth login --with-token <<< "$GH_WORK_TOKEN"
+    echo "Switched to work account"
+    gh auth status
+    ;;
+  "personal")
+    gh auth logout
+    gh auth login --with-token <<< "$GH_PERSONAL_TOKEN"
+    echo "Switched to personal account"
+    gh auth status
+    ;;
+  *)
+    echo "Usage: switch-gh [work|personal]"
+    ;;
+esac 

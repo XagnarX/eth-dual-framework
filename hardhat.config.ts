@@ -1,7 +1,6 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-foundry";
-import "@nomiclabs/hardhat-etherscan";
 import "hardhat-deploy";
 import * as dotenv from "dotenv";
 
@@ -10,9 +9,13 @@ dotenv.config();
 const config: HardhatUserConfig = {
   solidity: "0.8.28",
   networks: {
+    holesky: {
+      url: process.env.HOLESKY_URL || "",
+      accounts: process.env.HOLESKY_PRIVATE_KEY ? [process.env.HOLESKY_PRIVATE_KEY] : [],
+    },
     sepolia: {
       url: process.env.SEPOLIA_URL || "",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      accounts: process.env.SEPOLIA_PRIVATE_KEY ? [process.env.SEPOLIA_PRIVATE_KEY] : [],
     }
   },
   etherscan: {
